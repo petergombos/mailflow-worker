@@ -4,11 +4,12 @@
   "description": "Processing jobs from API",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2",
+    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-0",
     "build": "babel src -d dist",
     "serve": "node dist/index.js",
     "test": "mocha --compilers js:babel-register",
-    "tdd": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-register\""
+    "tdd": "NODE_ENV=test nodemon --exec \"mocha --compilers js:babel-register\"",
+    "deploy": "npm run build && docker build . -t petergombos/mailflow-worker && docker push petergombos/mailflow-worker:latest"
   },
   "author": "Peter Gombos <pepegombos@gmail.com>",
   "license": "ISC",

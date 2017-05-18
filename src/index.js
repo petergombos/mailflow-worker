@@ -5,9 +5,10 @@ import {
   createAccountVariations,
   validateDomain
 } from 'mailflow-core'
+import config from './config'
 
-const initQueue = Queue('init search')
-const searchQueue = Queue('search')
+const initQueue = Queue('init search', config.REDIS_URL, config.redisOpts)
+const searchQueue = Queue('search', config.REDIS_URL, config.redisOpts)
 
 initQueue.process(async (job) => {
   const { _id, name, domain } = job.data
