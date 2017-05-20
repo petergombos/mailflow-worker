@@ -24,16 +24,20 @@ initQueue.process(async (job) => {
   })
 })
 
-const createSerchJobs = (chunks, mx, _id) =>
-  Promise.all(chunks.map((possibleAcounts, index) =>
-    searchQueue.add({
-      possibleAcounts,
+const createSerchJobs = async (chunks, mx, _id) => {
+  const jobs = []
+  for (let i = 0; i < chunks.length; i++) {
+    const job = await searchQueue.add({
+      possibleAcounts: chunks[i],
       mx,
       _id
     })
-  ))
+    jobs.push(job)
+  }
+  return jobs
+}
 
-searchQueue.process(5, (job) =>
+searchQueue.process(10, (job) =>
   validateEmails(job.data.possibleAcounts, job.data.mx)
 )
 
