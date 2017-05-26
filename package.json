@@ -34,6 +34,6 @@
   },
   "dependencies": {
     "bull": "^3.0.0-alpha.4",
-    "mailflow-core": "^0.0.43"
+    "mailflow-core": "^0.0.44"
   }
 }

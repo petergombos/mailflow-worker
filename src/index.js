@@ -38,7 +38,7 @@ const createSerchJobs = async (chunks, mx, _id) => {
 }
 
 searchQueue.process(10, (job) =>
-  validateEmails(job.data.possibleAcounts, job.data.mx)
+  validateEmails(job.data.possibleAcounts, job.data.mx, { verbose: true })
 )
 
 //  Logging
